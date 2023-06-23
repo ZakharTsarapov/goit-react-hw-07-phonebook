@@ -1,0 +1,25 @@
+.contact__btn {
+    margin-left: 30px;
+    cursor: pointer;
+    border: none;
+    background-color: aquamarine;
+    height: 30px;
+}
+
+.contact__input {
+    cursor: pointer;
+    border: 2px solid tomato;
+    height: 20px;
+    margin-left: 20px;
+}
+
+.contact__label {
+    color: aqua;
+    margin-left: 20px;
+    font-size: 30px;
+}
+
+.contact__form {
+    display: flex;
+    justify-content: space-around;
+}

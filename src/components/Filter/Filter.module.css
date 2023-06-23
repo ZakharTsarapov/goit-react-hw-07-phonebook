@@ -1,0 +1,13 @@
+.filter {
+
+    color: aqua;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.filter__input {
+    margin-left: 30px;
+    border: 2px solid tomato;
+    cursor: pointer;
+}

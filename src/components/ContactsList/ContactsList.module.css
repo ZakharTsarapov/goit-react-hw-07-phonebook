@@ -1,0 +1,15 @@
+.item {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    color: tomato;
+    justify-content: space-around;
+}
+
+.item__btn {
+    margin-left: 10px;
+    height: 30px;
+    background-color: aquamarine;
+    border: none;
+    cursor: pointer;
+}
