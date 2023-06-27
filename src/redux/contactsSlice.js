@@ -10,6 +10,8 @@ const initialState = {
   error: null,
 };
 
+
+
 const handlePending = state => {
   state.isLoading = true;
 };

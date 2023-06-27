@@ -34,10 +34,10 @@ const getVisibleContacts = useMemo(
   return (
     <>
      <ul className={css.item}>
-        {visibleContacts.map(({ id, name, number }) => (
+        {visibleContacts.map(({ id, name, phone }) => (
           <li key={id}>
             <span>
-              {name} {number}
+              {name} {phone}
             </span>
             <button
               className={css.item__btn}

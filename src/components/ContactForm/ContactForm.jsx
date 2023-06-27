@@ -4,19 +4,24 @@ import { nanoid } from 'nanoid';
 import css from './ContactForm.module.css';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { getContactsItems } from 'redux/contactsSlice';
+import { fetchContacts } from '../../redux/operations';
+import { useEffect } from 'react';
 
 const nameId = nanoid();
 const numberId = nanoid();
 
 export const ContactForm = () => {
-  const { items: contacts=[] } = useSelector(getContactsItems);
+  const { items: contacts = [] } = useSelector(getContactsItems);
 
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(fetchContacts()); // при першому рендері викликає ф-цію запиту на бекенд за контактами
+  }, [dispatch]); //useEffect не знає що таке dispatch/чи він здатен змінитися і про всяк випадок просить його в залежність
 
-  const checkName = (name, number) => {
+  const checkName = (name, phone) => {
     const chekingName = contacts.some(
-      (contact) => contact.name.toLowerCase() === name.toLowerCase()
+      contact => contact.name.toLowerCase() === name.toLowerCase()
     );
 
     if (chekingName) {
@@ -24,20 +29,18 @@ export const ContactForm = () => {
       return;
     }
 
-    const newContact = { name, number }
+    const newContact = { name, phone };
 
     dispatch(addContact(newContact));
   };
 
-    const handleSubmit = e => {
-      e.preventDefault();
-      const name = e.target.elements.name.value.trim();
-      const number = e.target.elements.number.value.trim();
-      checkName(name, number);
-      e.target.reset();
-    };
-
-
+  const handleSubmit = e => {
+    e.preventDefault();
+    const name = e.target.elements.name.value.trim();
+    const phone = e.target.elements.number.value.trim();
+    checkName(name, phone);
+    e.target.reset();
+  };
 
   return (
     <form className={css.contact__form} onSubmit={handleSubmit}>
@@ -70,7 +73,6 @@ export const ContactForm = () => {
       </button>
     </form>
   );
-  
 }
   
 
