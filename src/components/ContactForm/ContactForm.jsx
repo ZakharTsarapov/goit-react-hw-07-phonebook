@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { addContact } from '../../redux/contactsSlice';
+import { addContact } from '../../redux/operations';
 import { nanoid } from 'nanoid';
 import css from './ContactForm.module.css';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
@@ -9,28 +9,30 @@ const nameId = nanoid();
 const numberId = nanoid();
 
 export const ContactForm = () => {
-  const contacts = useSelector(getContactsItems);
+  const { items: contacts=[] } = useSelector(getContactsItems);
 
   const dispatch = useDispatch();
 
 
-  const checkName = (newName, newNumber) => {
+  const checkName = (name, number) => {
     const chekingName = contacts.some(
-      (contact) => contact.name.toLowerCase() === newName.toLowerCase()
+      (contact) => contact.name.toLowerCase() === name.toLowerCase()
     );
 
     if (chekingName) {
-      Notify.failure(`${newName} is already in contacts`);
+      Notify.failure(`${name} is already in contacts`);
       return;
     }
 
-    dispatch(addContact(newName, newNumber)); //відправка даних в contactsSlice для записування в стор
+    const newContact = { name, number }
+
+    dispatch(addContact(newContact));
   };
 
     const handleSubmit = e => {
       e.preventDefault();
-      const name = e.target.elements.name.value;
-      const number = e.target.elements.number.value;
+      const name = e.target.elements.name.value.trim();
+      const number = e.target.elements.number.value.trim();
       checkName(name, number);
       e.target.reset();
     };

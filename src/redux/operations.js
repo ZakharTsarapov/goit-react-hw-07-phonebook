@@ -6,7 +6,6 @@ export const fetchContacts = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const data = await getContacts();
-
       const sortedByName = data.sort((a, b) => a.name.localeCompare(b.name));
       return sortedByName;
     } catch (error) {

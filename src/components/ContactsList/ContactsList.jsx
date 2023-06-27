@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useMemo } from 'react';
-import { deleteContact } from 'redux/contactsSlice';
+import { removeContact } from 'redux/operations';
 import PropTypes from 'prop-types';
 import css from './ContactsList.module.css';
 import { getFilterValue } from 'redux/filterSlice';
@@ -10,10 +10,10 @@ export const ContactsList = () => {
 
   const dispatch = useDispatch();
   const filterValue = useSelector(getFilterValue);
-  const contacts = useSelector(getContactsItems);
+  const { items : contacts} = useSelector(getContactsItems);
 
   const onDeleteContact = contactID => {
-    dispatch(deleteContact(contactID));
+    dispatch(removeContact(contactID));
   };
 
 const getVisibleContacts = useMemo(
@@ -33,7 +33,7 @@ const getVisibleContacts = useMemo(
 
   return (
     <>
-      <ul className={css.item}>
+     <ul className={css.item}>
         {visibleContacts.map(({ id, name, number }) => (
           <li key={id}>
             <span>
