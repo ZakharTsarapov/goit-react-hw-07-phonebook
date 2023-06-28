@@ -23,7 +23,7 @@ const getVisibleContacts = useMemo(
       .filter(
         contact =>
           contact.name.toLowerCase().includes(normalizedFilter) ||
-          contact.number.includes(normalizedFilter)
+          contact.phone.includes(normalizedFilter)
       )
   },
   [contacts, filterValue]
