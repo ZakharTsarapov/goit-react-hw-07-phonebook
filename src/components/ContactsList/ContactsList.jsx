@@ -33,12 +33,13 @@ const getVisibleContacts = useMemo(
 
   return (
     <>
-     <ul className={css.item}>
-        {visibleContacts.map(({ id, name, phone }) => (
+      <ul className={css.item}>
+        {visibleContacts.map(({ id, name, phone, img }) => (
           <li key={id}>
             <span>
-              {name} {phone}
+              Name:{name} phone:{phone} id:{id}
             </span>
+            <img alt='avatar' src={img}/>
             <button
               className={css.item__btn}
               onClick={() => onDeleteContact(id)}
